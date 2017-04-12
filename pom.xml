@@ -37,6 +37,22 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <changeLogFile>db/changelog/master.xml</changeLogFile>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>${stm.db.url}</url>
+                    <username>${stm.db.user}</username>
+                    <password>${stm.db.password}</password>
+                    <verbose>false</verbose>
+                    <logging>info</logging>
+                    <contexts>${stm.db.contexts}</contexts>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
