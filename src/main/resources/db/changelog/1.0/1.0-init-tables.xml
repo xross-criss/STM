@@ -14,9 +14,7 @@
                     autoIncrement="true">
                 <constraints primaryKey="true"
                              unique="true"
-                             primaryKeyName="PK_prv_object_id"
-                             foreignKeyName="FK_prv_object_id"
-                             references="prv_object_privilege(prv_object_to)"/>
+                             primaryKeyName="PK_prv_object_id"/>
             </column>
             <column name="created_date"
                     type="datetime"/>
@@ -28,13 +26,15 @@
             <column name="prv_object_from"
                     type="bigint">
                 <constraints primaryKey="true"
-                             primaryKeyName="PK_prv_object_privilege_id"
-                             foreignKeyName="FK_prv_object_privilege_id" references="prv_object(id)"/>
+                             primaryKeyName="PK_prv_object_privilege_prv_object_from"
+                             foreignKeyName="FK_prv_object_privilege_prv_object_from" references="prv_object(id)"/>
             </column>
             <column name="prv_object_to"
                     type="bigint">
                 <constraints primaryKey="true"
-                             primaryKeyName="PK_prv_object_privilege_id"/>
+                             primaryKeyName="PK_prv_object_privilege_prv_object_to"
+                             foreignKeyName="FK_prv_object_privilege_prv_object_to"
+                             references="prv_object(id)"/>
             </column>
             <column name="privilege"
                     type="VARCHAR(32)">
