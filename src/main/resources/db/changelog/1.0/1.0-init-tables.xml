@@ -14,12 +14,148 @@
                     autoIncrement="true">
                 <constraints primaryKey="true"
                              unique="true"
-                             primaryKeyName="PK_prv_object_id"/>
+                             primaryKeyName="PK_prv_object_id"
+                             foreignKeyName="FK_prv_object_id"
+                             references="prv_object_privilege(prv_object_to)"/>
             </column>
             <column name="created_date"
                     type="datetime"/>
             <column name="modified_date"
                     type="datetime"/>
+        </createTable>
+
+        <createTable tableName="prv_object_privilege">
+            <column name="prv_object_from"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_prv_object_privilege_id"
+                             foreignKeyName="FK_prv_object_privilege_id" references="prv_object(id)"/>
+            </column>
+            <column name="prv_object_to"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_prv_object_privilege_id"/>
+            </column>
+            <column name="privilege"
+                    type="VARCHAR(32)">
+            </column>
+        </createTable>
+
+        <createTable tableName="mod_category">
+            <column name="id"
+                    type="bigint"
+                    autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_mod_category_id"/>
+            </column>
+            <column name="name"
+                    type="VARCHAR(32)">
+            </column>
+        </createTable>
+
+        <createTable tableName="mod_work">
+            <column name="id"
+                    type="bigint"
+                    autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_mod_work_id"
+                             foreignKeyName="FK_mod_work_id"
+                             references="prv_object(id)"/>
+            </column>
+            <column name="name"
+                    type="TEXT"/>
+            <column name="subject"
+                    type="TEXT"/>
+            <column name="description"
+                    type="TEXT"/>
+            <column name="status"
+                    type="VARCHAR(3)"/>
+        </createTable>
+
+        <createTable tableName="mod_work_category">
+            <column name="id_category"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_mod_work_category_ID_category"
+                             foreignKeyName="FK_mod_work_category_ID_category"
+                             references="mod_category(id)"/>
+            </column>
+            <column name="id"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_mod_work_category_id"
+                             foreignKeyName="FK_mod_wrok_category_id"
+                             references="mod_work(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="prv_user">
+            <column name="id"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_prv_user_id"
+                             foreignKeyName="FK_prv_user_id"
+                             references="prv_object(id)"/>
+            </column>
+            <column name="firstname"
+                    type="VARCHAR(32)"/>
+            <column name="secondname"
+                    type="VARCHAR(32)"/>
+            <column name="surname"
+                    type="VARCHAR(32)"/>
+            <column name="title"
+                    type="VARCHAR(32)"/>
+            <column name="email"
+                    type="VARCHAR(32)"/>
+            <column name="phone"
+                    type="INTEGER"/>
+            <column name="status"
+                    type="VARCHAR(3)"/>
+        </createTable>
+
+        <createTable tableName="mod_task">
+            <column name="id"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_mod_task_id"
+                             foreignKeyName="FK_mod_task_id"
+                             references="mod_work(id)"/>
+            </column>
+            <column name="id_project"
+                    type="bigint">
+                <constraints foreignKeyName="FK_mod_task_id_project"
+                             references="mod_project(id)"/>
+            </column>
+            <column name="parent"
+                    type="bigint">
+                <constraints foreignKeyName="FK_mod_task_parent"
+                             references="mod_task(id)"/>
+            </column>
+            <column name="assigned"
+                    type="bigint">
+                <constraints foreignKeyName="FK_mod_task_assigned"
+                             references="prv_user(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="mod_project">
+            <column name="id"
+                    type="bigint">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_mod_project_id"
+                             foreignKeyName="FK_mod_project_id"
+                             references="mod_work(id)"/>
+            </column>
+            <column name="owner"
+                    type="bigint">
+                <constraints foreignKeyName="FK_mod_project_owner"
+                             references="prv_user(id)"/>
+            </column>
+            <column name="parent"
+                    type="bigint">
+                <constraints foreignKeyName="FK_mod_project_parent"
+                             references="mod_project(id)"/>
+            </column>
         </createTable>
 
     </changeSet>
