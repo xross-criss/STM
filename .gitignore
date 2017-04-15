@@ -18,3 +18,4 @@ hs_err_pid*
 log/
 target/
 info.txt
+/node_modules/
