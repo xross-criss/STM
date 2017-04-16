@@ -1,4 +1,4 @@
-package pl.morecraft.dev.stm.domain.view;
+package pl.morecraft.dev.stm.domain;
 
 import org.jetbrains.annotations.NotNull;
 import pl.morecraft.dev.stm.domain.dictionaries.proto.DefaultDictionary;
