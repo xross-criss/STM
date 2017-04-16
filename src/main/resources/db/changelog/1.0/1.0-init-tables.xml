@@ -164,6 +164,21 @@
             </column>
         </createTable>
 
+        <createTable tableName="mod_project_user">
+            <column name="id_user"
+                    type="BIGINT">
+                <constraints foreignKeyName="FK_mod_project_user_id_user"
+                             references="prv_user(id)"/>
+            </column>
+            <column name="id_project"
+                    type="BIGINT">
+                <constraints foreignKeyName="FK_mod_project_user_id_project"
+                             references="mod_project(id)"/>
+            </column>
+            <column name="privilige"
+                    type="TEXT"/>
+        </createTable>
+
     </changeSet>
 
 </databaseChangeLog>
