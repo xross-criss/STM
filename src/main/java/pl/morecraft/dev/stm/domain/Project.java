@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "mod_project")
@@ -18,6 +19,9 @@ public class Project extends Work {
     @JoinColumn(name = "parent")
     private Project parent;
 
-//    private List<User> // brakuje ci chyba tabeli zlaczeniowej dla project-user (mod_project_user)
+    @JoinColumn(name = "owner")
+    private User owner;
+
+    private List<User> project_user;
 
 }
