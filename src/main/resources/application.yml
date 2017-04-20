@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: @stm.db.url@
+    username: @stm.db.user@
+    password: @stm.db.password@
+
+logging.level.pl.morecraft.dev.stm: TRACE
