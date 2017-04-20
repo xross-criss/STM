@@ -17,5 +17,4 @@ hs_err_pid*
 # Other project files
 log/
 target/
-info.txt
-/node_modules/
+*.iml

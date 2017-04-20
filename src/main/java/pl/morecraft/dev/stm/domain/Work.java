@@ -21,5 +21,5 @@ public abstract class Work extends PrivilegeObject {
 
     @Enumerated(EnumType.STRING)
     private WorkStatus status;
-
+    //lista kategorii
 }

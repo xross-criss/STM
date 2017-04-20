@@ -3,19 +3,22 @@ package pl.morecraft.dev.stm.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "mod_work")
+@Table(name = "prv_object")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public abstract class PrivilegeObject {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime createdDate;

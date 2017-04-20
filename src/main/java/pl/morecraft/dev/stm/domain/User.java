@@ -3,6 +3,7 @@ package pl.morecraft.dev.stm.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import pl.morecraft.dev.stm.domain.dictionary.UserStatus;
 
 import javax.persistence.Entity;
@@ -14,17 +15,18 @@ import javax.persistence.Table;
 @Table(name = "prv_user")
 @Getter
 @Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class User extends PrivilegeObject {
 
-    private String first_name;
-    private String second_name;
-    private String last_name;
+    private String firstName;
+    private String secondName;
+    private String lastName;
     private String title;
     private String email;
-    private int phone;
     private String password;
-    private String password_expiration_date;
+    private String passwordExpirationDate;
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;

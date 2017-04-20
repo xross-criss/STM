@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -16,12 +14,18 @@ import java.util.List;
 @NoArgsConstructor
 public class Project extends Work {
 
+    @OneToOne
     @JoinColumn(name = "parent")
     private Project parent;
 
+    @ManyToOne(optional = false)
     @JoinColumn(name = "owner")
     private User owner;
 
-    private List<User> project_user;
+    @ManyToMany
+    @JoinTable(name = "mod_project_user",
+            joinColumns = {@JoinColumn(name = "mod_project_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "prv_user_id", referencedColumnName = "id")})
+    private List<User> users;
 
 }
