@@ -99,6 +99,8 @@
                              foreignKeyName="FK_prv_user_id"
                              references="prv_object(id)"/>
             </column>
+            <column name="login"
+                    type="VARCHAR(32)"/>
             <column name="first_name"
                     type="VARCHAR(32)"/>
             <column name="second_name"

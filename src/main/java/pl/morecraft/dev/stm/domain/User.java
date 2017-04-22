@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class User extends PrivilegeObject {
 
+    private String login;
     private String firstName;
     private String secondName;
     private String lastName;
