@@ -6,6 +6,7 @@ import lombok.Setter;
 import pl.morecraft.dev.stm.domain.dictionary.WorkStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mod_work")
@@ -21,5 +22,11 @@ public abstract class Work extends PrivilegeObject {
 
     @Enumerated(EnumType.STRING)
     private WorkStatus status;
-    //lista kategorii
+
+
+    @ManyToMany
+    @JoinTable(name = "mod_work_category",
+            joinColumns = {@JoinColumn(name = "mod_work_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "mod_category_id", referencedColumnName = "id")})
+    private List<Category> categories;
 }
