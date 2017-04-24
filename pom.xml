@@ -42,7 +42,6 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
-        <!-- Logging framework -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -57,9 +56,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.5</version>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>0.7.5</version>
         </dependency>
     </dependencies>
 
@@ -98,7 +97,20 @@
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
+
+    <profiles>
+        <profile>
+            <id>stm-dev-db-local</id>
+            <properties>
+                <stm.db.url>
+                    jdbc:mysql://localhost:3306/dev_stm?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true
+                </stm.db.url>
+                <stm.db.user>stm_user</stm.db.user>
+                <stm.db.password>M0arEsTeEm</stm.db.password>
+                <stm.db.contexts>dev</stm.db.contexts>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
