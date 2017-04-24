@@ -16,11 +16,9 @@ import javax.persistence.Table;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class Category {
+public class Category extends PrivilegeObject {
 
-    @Enumerated(EnumType.STRING)
     private String code;
-
     private String description;
 
 }
