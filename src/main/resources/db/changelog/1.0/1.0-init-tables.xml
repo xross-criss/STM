@@ -46,7 +46,9 @@
                     type="BIGINT"
                     autoIncrement="true">
                 <constraints primaryKey="true"
-                             primaryKeyName="PK_mod_category_id"/>
+                             primaryKeyName="PK_mod_category_id"
+                             foreignKeyName="FK_mod_category_id"
+                             references="prv_object(id)"/>
             </column>
             <column name="code"
                     type="VARCHAR(32)">
@@ -91,7 +93,7 @@
             </column>
         </createTable>
 
-        <createTable tableName="prv_user"> <!-- TODO unique column-->
+        <createTable tableName="prv_user">
             <column name="id"
                     type="BIGINT">
                 <constraints primaryKey="true"
@@ -100,7 +102,10 @@
                              references="prv_object(id)"/>
             </column>
             <column name="login"
-                    type="VARCHAR(32)"/>
+                    type="VARCHAR(32)">
+                <constraints unique="true"/>
+            </column>
+
             <column name="first_name"
                     type="VARCHAR(32)"/>
             <column name="second_name"
