@@ -6,23 +6,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import pl.morecraft.dev.stm.domain.User;
-import pl.morecraft.dev.stm.repository.UserRepository;
+import pl.morecraft.dev.stm.dto.UserDTO;
+import pl.morecraft.dev.stm.service.UserService;
 
 import java.io.IOException;
-import java.util.Objects;
+
 
 @Slf4j
 @RestController
 @RequestMapping("/api/user")
 public class UserResource {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public UserResource(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserResource(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(
@@ -30,18 +30,11 @@ public class UserResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> getUser(@RequestParam(value = "id") Long id) throws IOException {
-        User user = userRepository.findOne(id);
-        if (Objects.isNull(user)) {
-            return new ResponseEntity<>(
-                    HttpStatus.NOT_FOUND
-            );
-        } else {
-            return new ResponseEntity<>(
-                    user,
-                    HttpStatus.OK
-            );
-        }
+    public ResponseEntity<UserDTO> getUser(@RequestParam(value = "id") Long id) throws IOException {
+        return new ResponseEntity<>(
+                userService.getUser(id),
+                HttpStatus.OK
+        );
     }
 
     @RequestMapping(
@@ -49,13 +42,10 @@ public class UserResource {
             method = {RequestMethod.POST, RequestMethod.PUT},
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<User> saveUser(@ModelAttribute User user) throws IOException {
-        log.debug("Saving User: " + user.toString());
-        user = userRepository.save(user);
+    public ResponseEntity<UserDTO> saveUser(@ModelAttribute UserDTO user) throws IOException {
         return new ResponseEntity<>(
-                user,
+                userService.saveUser(user),
                 HttpStatus.OK
         );
     }
-
 }

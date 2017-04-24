@@ -6,22 +6,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.morecraft.dev.stm.domain.Task;
-import pl.morecraft.dev.stm.repository.TaskRepository;
-
+import pl.morecraft.dev.stm.dto.TaskDTO;
+import pl.morecraft.dev.stm.service.TaskService;
 import java.io.IOException;
-import java.util.Objects;
 
 @Slf4j
 @RestController
 @RequestMapping("/api/task")
 public class TaskResource {
 
-    private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
     @Autowired
-    public TaskResource(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public TaskResource(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @RequestMapping(
@@ -29,19 +27,11 @@ public class TaskResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-
-    public ResponseEntity<Task> getTask(@RequestParam(value = "id") Long id) throws IOException {
-        Task task = taskRepository.findOne(id);
-        if (Objects.isNull(task)) {
-            return new ResponseEntity<>(
-                    HttpStatus.NOT_FOUND
-            );
-        } else {
-            return new ResponseEntity<>(
-                    task,
-                    HttpStatus.OK
-            );
-        }
+    public ResponseEntity<TaskDTO> getTask(@RequestParam(value = "id") Long id) throws IOException {
+        return new ResponseEntity<>(
+                taskService.getTask(id),
+                HttpStatus.OK
+        );
     }
 
     @RequestMapping(
@@ -50,12 +40,11 @@ public class TaskResource {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
 
-    public ResponseEntity<Task> saveTask(@ModelAttribute Task task) throws IOException {
-        log.debug("Saving Task: " + task.toString());
-        task = taskRepository.save(task);
+    public ResponseEntity<TaskDTO> saveTask(@ModelAttribute TaskDTO task) throws IOException {
         return new ResponseEntity<>(
-                task,
+                taskService.saveTask(task),
                 HttpStatus.OK
         );
     }
+
 }
