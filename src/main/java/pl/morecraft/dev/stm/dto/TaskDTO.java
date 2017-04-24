@@ -1,6 +1,5 @@
 package pl.morecraft.dev.stm.dto;
 
-
 import lombok.*;
 
 @AllArgsConstructor
@@ -8,10 +7,11 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class CategoryDTO {
+public class TaskDTO {
 
     private Long id;
-    private String code;
-    private String description;
+    private Long project_id;
+    private Long parent;
+    private Long assigned;
 
 }
