@@ -10,7 +10,7 @@ import lombok.*;
 public class TaskDTO {
 
     private Long id;
-    private Long project_id;
+    private Long projectId;
     private Long parent;
     private Long assigned;
 

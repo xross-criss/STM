@@ -18,7 +18,7 @@ public class Task extends Work {
     private Task parent;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "projectId")
     private Project project;
 
     @ManyToOne(optional = false)
