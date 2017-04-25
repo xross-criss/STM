@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.morecraft.dev.stm.domain.Project;
 import pl.morecraft.dev.stm.domain.Task;
 import pl.morecraft.dev.stm.dto.TaskDTO;
+import pl.morecraft.dev.stm.exception.BadRequestException;
 import pl.morecraft.dev.stm.exception.ObjectNotFoundException;
 import pl.morecraft.dev.stm.repository.ProjectRepository;
 import pl.morecraft.dev.stm.repository.TaskRepository;
@@ -40,13 +41,14 @@ public class TaskService {
         ModelMapper modelMapper = new ModelMapper();
         Task task = modelMapper.map(taskDTO, Task.class);
 
-        if(taskDTO.getProject_id() == null){
-            throw new ObjectNotFoundException("For Task with id=" + taskDTO.getId()+", cannot be inserted null value as Project Id");
+        if (Objects.isNull(taskDTO.getProjectId())) {
+            throw new BadRequestException("For Task with id=" + taskDTO.getId() + ", cannot be inserted null value as Project Id");
         } else {
-            Project project = projectRepository.findOne(taskDTO.getProject_id());
-            if(){ //TODO - if statement to check
-                throw new ObjectNotFoundException("Cannot find proper project with id=" + taskDTO.getProject_id()+", for Task with id=" + taskDTO.getId());
+            Project project = projectRepository.findOne(taskDTO.getProjectId());
+            if (Objects.isNull(project)) {
+                throw new BadRequestException("Cannot find proper project with id=" + taskDTO.getProjectId() + ", for Task with id=" + taskDTO.getId());
             }
+            task.setProject(project);
         }
 
         log.debug("Saving Task: " + taskDTO.toString());
