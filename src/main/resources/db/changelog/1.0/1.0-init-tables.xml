@@ -154,7 +154,7 @@
                              foreignKeyName="FK_mod_task_id"
                              references="mod_work(id)"/>
             </column>
-            <column name="project_id"
+            <column name="projectId"
                     type="BIGINT">
                 <constraints foreignKeyName="FK_mod_task_project_id"
                              references="mod_project(id)"/>
