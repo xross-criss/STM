@@ -1,2 +1,2 @@
-# STM
-SimpleTaskManager
+# BDB
+Book Database Connector

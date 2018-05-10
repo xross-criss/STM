@@ -7,5 +7,6 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <include file="db/changelog/1.0/1.0-init-tables.xml"/>
+    <include file="db/changelog/1.0/1.0-init-data.xml"/>
 
 </databaseChangeLog>

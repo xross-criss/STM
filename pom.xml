@@ -5,14 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.morecraft.dev</groupId>
-    <artifactId>stm</artifactId>
-    <version>0.0.1</version>
+    <artifactId>bdb</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>STM</name>
-
-    <scm>
-        <url>https://github.com/xross-criss/STM</url>
-    </scm>
+    <name>Book Database Connector</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,7 +18,7 @@
     <parent>
         <groupId>io.spring.platform</groupId>
         <artifactId>platform-bom</artifactId>
-        <version>Athens-SR4</version>
+        <version>Athens-SR6</version>
     </parent>
 
     <dependencies>
@@ -58,7 +54,7 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-            <version>0.7.5</version>
+            <version>1.1.3</version>
         </dependency>
     </dependencies>
 
@@ -83,16 +79,16 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.1</version>
                 <configuration>
                     <changeLogFile>db/changelog/master.xml</changeLogFile>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>${stm.db.url}</url>
-                    <username>${stm.db.user}</username>
-                    <password>${stm.db.password}</password>
+                    <url>${bdb.db.url}</url>
+                    <username>${bdb.db.user}</username>
+                    <password>${bdb.db.password}</password>
                     <verbose>false</verbose>
                     <logging>info</logging>
-                    <contexts>${stm.db.contexts}</contexts>
+                    <contexts>${bdb.db.contexts}</contexts>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                 </configuration>
             </plugin>
@@ -101,14 +97,14 @@
 
     <profiles>
         <profile>
-            <id>stm-dev-db-local</id>
+            <id>bdb-dev-db-local</id>
             <properties>
-                <stm.db.url>
-                    jdbc:mysql://localhost:3306/dev_stm?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true
-                </stm.db.url>
-                <stm.db.user>stm_user</stm.db.user>
-                <stm.db.password>M0arEsTeEm</stm.db.password>
-                <stm.db.contexts>dev</stm.db.contexts>
+                <bdb.db.url>
+                    jdbc:mysql://localhost:3306/dev_bdb?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true
+                </bdb.db.url>
+                <bdb.db.user>bdb_user</bdb.db.user>
+                <bdb.db.password>BdBPass</bdb.db.password>
+                <bdb.db.contexts>dev</bdb.db.contexts>
             </properties>
         </profile>
     </profiles>
