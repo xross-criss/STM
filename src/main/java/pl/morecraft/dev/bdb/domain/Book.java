@@ -6,31 +6,19 @@ import lombok.Setter;
 import lombok.ToString;
 import pl.morecraft.dev.bdb.domain.dictionary.BookStatus;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "author")
 @Getter
 @Setter
-@ToString(callSuper = true)
+@ToString
 @NoArgsConstructor
-public class Book {
+public class Book implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String title;
-
-    @ManyToOne
-    @JoinColumn(name = "author")
     private Author author;
-
-    @ManyToOne
-    @JoinColumn(name = "category")
     private Category category;
-
-    @Enumerated(EnumType.STRING)
     private BookStatus status;
 
 }

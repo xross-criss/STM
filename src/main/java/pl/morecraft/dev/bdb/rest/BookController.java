@@ -2,18 +2,17 @@ package pl.morecraft.dev.bdb.rest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.morecraft.dev.bdb.dto.BookDTO;
+import pl.morecraft.dev.bdb.domain.Book;
 import pl.morecraft.dev.bdb.service.BookService;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/api/book")
 public class BookController {
 
     private final BookService bookService;
@@ -23,23 +22,14 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @RequestMapping(value = "/{bookId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookDTO> getAuthor(@RequestParam(value = "bookId") Integer bookId) throws IOException {
-        return new ResponseEntity<>(
-                bookService.getBook(bookId),
-                HttpStatus.OK
-        );
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Book> getAuthor() throws IOException {
+        return bookService.getBookList();
     }
 
-    @RequestMapping(
-            value = "",
-            method = {RequestMethod.POST, RequestMethod.PUT},
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<BookDTO> saveTask(@ModelAttribute BookDTO book) throws IOException {
-        return new ResponseEntity<>(
-                bookService.saveBook(book),
-                HttpStatus.OK
-        );
+    @RequestMapping(value = "/{bookId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Book getAuthor(@PathVariable(value = "bookId") Integer bookId) throws IOException {
+        return bookService.getBook(bookId);
     }
+
 }

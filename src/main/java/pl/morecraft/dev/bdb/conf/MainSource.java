@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("pl.morecraft.dev.bdb.repository")
 public class MainSource {
 
     @Bean
