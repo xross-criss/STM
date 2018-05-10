@@ -23,7 +23,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @RequestMapping(value = "/{bookId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{bookId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDTO> getAuthor(@RequestParam(value = "bookId") Integer bookId) throws IOException {
         return new ResponseEntity<>(
                 bookService.getBook(bookId),
