@@ -22,11 +22,11 @@ public class Book {
 
     private String title;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "author")
     private Author author;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category")
     private Category category;
 
